@@ -4,11 +4,13 @@ Finally, you will pay attention to your meetings.
 
 ## What it is? 
 
-1. A Bingo game based on the most often used (key)words during your work meetings. Ex: (high) availability, scalability and maintainability.
+1. An over-engineered, enterprise level, Bingo game based on the most often used (key)words during your work meetings. Ex: (high) availability, scalability and maintainability.
 2. An opportunity for any developer to make contributions so we can share knowledges and apply best practices from Agile Management to less important things (such as coding).
 3. An attempt to make the following statement return true: Having development hours is something that pay off.
 4. An opportunity for learning: Software Engineering, programming (Python, at first, but not limited to it), CD/CI ? Containerization (some Kubernets + Docker)? Queues (Kafka, Rabbit MQ, other?) 
-5.Solo, at first, and, in the near future, multiplayer.
+5. Solo, at first, and, in the near future, multiplayer.
+6. The MVP - Mimimum Viable Product, as you might expect, is a simple Pyhon (of course) script, but spare your tears: Wait until you see what we are doing (will do) in Java.
+7. A repository of best practices - we are very serious and open to discussions in this particular regard.
 
 ## What it is not?
 
