@@ -1,15 +1,63 @@
 import random
+from math import sqrt, floor
 
-with open("buzzwords.lingo", "r") as f:
-    lines = f.readlines()
 
-buzzwords = []
-for line in lines:
-    split = line.split(",")
-    for word in split:
-        if word != "\n":
-            buzzwords.append(word)
+def loadFromFile():
+    """loads the buzz words from the default file buzzwords.lingo, which is expected to be located into the same
+    directory where the program is called """
+    with open("buzzwords.lingo", "r") as f:
+        lines = f.readlines()
+    buzzwords = []
+    for line in lines:
+        split = line.split(",")
+        for word in split:
+            if word != "\n":
+                buzzwords.append(word)
+    return buzzwords
 
-boardWords = random.sample(buzzwords, 9)
 
-print(boardWords)
+def readBoardSize(maxSize) -> int:
+    """ Reads the (squared) board size and validates that, given the number of available words, loaded from the
+        buzzwords file, the max size of the boards is respected.
+
+        Args:
+            maxSize: The max size of the board. If the max size is n, then the largest board possible is  an
+            n x n board
+        Returns:
+            An integer value n representing the desired board of size n x n."""
+    while True:
+        size = floor(float((input("Pick a board size from 2 to {}: ".format(maxSize)))))
+        if size < 2 or size > maxSize:
+            print("The board size {} is not valid.".format(size))
+        else:
+            return size
+
+
+def printBoard(buzzWordsList, size):
+    """ Helper that pretty prints a Bingo board to the console.
+
+        Args:
+            buzzWordsList: the compiled list of candidate buzz words to populate the board.
+            size: the board size n aiming at building an n x n bingo board."""
+    largestLength = 1
+    for buzzword in buzzWordsList:
+        if len(buzzword) > largestLength:
+            largestLength = len(buzzword)
+    offSet = 2
+    formatString = "{:" + str(largestLength + offSet) + "s}"
+    sepLine = "-" * ((largestLength + offSet) * size + size + 1)
+    i = 0
+    for buzzword in buzzWordsList:
+        print("|" + formatString.format(buzzword), end="")
+        i += 1
+        if i == size:
+            print("", end="|\n")
+            print(sepLine)
+            i = 0
+
+
+wordsList = loadFromFile()
+maxBoardSize = int(sqrt(len(wordsList)))
+boardSize = readBoardSize(maxBoardSize)
+boardWords = random.sample(wordsList, boardSize ** 2)
+printBoard(boardWords, boardSize)
