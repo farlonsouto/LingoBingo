@@ -1,4 +1,5 @@
 import random
+import tkinter as tk
 from math import sqrt, floor
 
 
@@ -56,8 +57,32 @@ def printBoard(buzzWordsList, size):
             i = 0
 
 
+def plotBoardGui(buzzWordsList, size):
+    """Plots the bingo GUI. Nothing more than a panel full of buttons where each button corresponds to a word in the
+        bingo game.
+
+        Args:
+            buzzWordsList: the compiled list of candidate buzz words to populate the board.
+            size: the board size n aiming at building an n x n bingo board."""
+    window = tk.Tk()
+    window.title("Lingo Bingo")
+    # window.geometry("350x275")
+    i, j = 1, 0
+    buttons = []
+    for word in buzzWordsList:
+        button = tk.Button(window, text=word)
+        button.grid(row=i, column=j)
+        buttons.append(button)
+        j += 1
+        if j == size:
+            j = 0
+            i += 1
+    window.mainloop()
+
+
 wordsList = loadFromFile()
 maxBoardSize = int(sqrt(len(wordsList)))
 boardSize = readBoardSize(maxBoardSize)
 boardWords = random.sample(wordsList, boardSize ** 2)
 printBoard(boardWords, boardSize)
+plotBoardGui(boardWords, boardSize)
