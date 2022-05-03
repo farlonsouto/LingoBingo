@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from functools import partial
 from math import sqrt, floor
 
 
@@ -70,7 +71,8 @@ def plotBoardGui(buzzWordsList, size):
     i, j = 1, 0
     buttons = []
     for word in buzzWordsList:
-        button = tk.Button(window, text=word)
+        button = tk.Button(window, text=word.upper(), bg="white", activebackground="wheat2", height=8, width=16)
+        button["command"] = partial(switchButtonColor, button)
         button.grid(row=i, column=j)
         buttons.append(button)
         j += 1
@@ -78,6 +80,15 @@ def plotBoardGui(buzzWordsList, size):
             j = 0
             i += 1
     window.mainloop()
+
+
+def switchButtonColor(button):
+    if button.cget("bg") == "white":
+        button.configure(bg="khaki1")
+        button.configure(activebackground="lightgoldenrodyellow")
+    else:
+        button.configure(bg="white")
+        button.configure(activebackground="wheat2")
 
 
 wordsList = loadFromFile()
